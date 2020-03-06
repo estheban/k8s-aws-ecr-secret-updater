@@ -12,3 +12,7 @@ kubectl create secret docker-registry $SECRET_NAME \
   --docker-server=$DOCKER_REGISTRY_SERVER \
   --docker-username=$DOCKER_USER \
   --docker-password=$DOCKER_PASSWORD
+
+echo Patching serviceaccount
+kubectl patch serviceaccount default -p '{"imagePullSecrets":[{"name":"'${SECRET_NAME}'"}]}'
+
